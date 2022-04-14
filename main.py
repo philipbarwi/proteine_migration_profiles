@@ -54,12 +54,8 @@ if __name__ == '__main__':
     dataset_a = pandas.read_csv('./data/dataset_a.csv')
     dataset_b = pandas.read_csv('./data/dataset_b.csv')
     proteins = [x for x in list(dataset_a['T: Gene names']) if not pandas.isna(x)]
-    index = 1
     for protein in proteins:
-        index += 1
         log.append(plot_protein(dataset_a, dataset_b, protein))
-        if index == 20:
-            break
 
     print('Figures written to figures folder')
 
