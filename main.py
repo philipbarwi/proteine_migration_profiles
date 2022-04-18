@@ -11,7 +11,7 @@ def get_maximum_index(values):
     max_value = 0
     for value in values:
         try:
-            if float(value) > max_value:
+            if float(value) > float(max_value):
                 max_index = index
         except:
             pass
