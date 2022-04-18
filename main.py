@@ -60,8 +60,8 @@ def plot_protein(dataset_a, dataset_b, proteine_name):
 
 if __name__ == '__main__':
     log = []
-    dataset_a = pandas.read_csv('data/dataset_arl.csv')
-    dataset_b = pandas.read_csv('data/dataset_arl_b.csv')
+    dataset_a = pandas.read_csv('data/dataset_a.csv')
+    dataset_b = pandas.read_csv('data/dataset_b.csv')
     proteins = [x for x in list(dataset_a['T: Gene names']) if not pandas.isna(x)]
     for protein in proteins:
         plot_log = plot_protein(dataset_a, dataset_b, protein)
