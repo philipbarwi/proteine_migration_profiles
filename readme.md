@@ -6,7 +6,7 @@ It will generate:
 
 
 - CSV Data with the abundance information
-```commandline
+```
 protein,max_index_a,max_index_b,difference,filename
 LINC00493,22,11,11,./figures/LINC00493.png
 PIGBOS1,0,0,0,./figures/PIGBOS1.png

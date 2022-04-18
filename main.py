@@ -1,5 +1,4 @@
 import csv
-import uuid
 
 import pandas
 import matplotlib.pyplot as plt
@@ -22,8 +21,19 @@ def get_maximum_index(values):
 
 def plot_protein(dataset_a, dataset_b, proteine_name):
     filename = './figures/' + "".join(x for x in proteine_name if x.isalnum()) + '.png'
+
+    # get data via loc function by protein name with pandas
     y_values_a = list(list(dataset_a.loc[dataset_a['T: Gene names'] == proteine_name].values)[0])[1:]
     y_values_b = list(list(dataset_b.loc[dataset_b['T: Gene names'] == proteine_name].values)[0])[1:]
+
+    # cast values into flaot
+    try:
+        y_values_a = [float(x) for x in y_values_a]
+        y_values_b = [float(x) for x in y_values_b]
+    except Exception as e:
+        print("Could not plot Protein {}! Skipping! Reason: ".format(proteine_name))
+        print(str(e))
+        return
 
     max_index_a = get_maximum_index(y_values_a)
     max_index_b = get_maximum_index(y_values_b)
@@ -40,8 +50,6 @@ def plot_protein(dataset_a, dataset_b, proteine_name):
     plt.clf()
     return {
         'protein': proteine_name,
-        #'y_values_a': y_values_a,
-        #'y_values_b': y_values_b,
         'max_index_a': max_index_a,
         'max_index_b': max_index_b,
         'difference': difference,
@@ -55,7 +63,9 @@ if __name__ == '__main__':
     dataset_b = pandas.read_csv('./data/dataset_b.csv')
     proteins = [x for x in list(dataset_a['T: Gene names']) if not pandas.isna(x)]
     for protein in proteins:
-        log.append(plot_protein(dataset_a, dataset_b, protein))
+        plot_log = plot_protein(dataset_a, dataset_b, protein)
+        if plot_log:
+            log.append(plot_log)
 
     print('Figures written to figures folder')
 
